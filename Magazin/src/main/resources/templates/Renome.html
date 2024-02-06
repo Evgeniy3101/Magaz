@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Интернет-магазин Renome</title>
+
+    <style>
+        .product {
+          display: flex;
+          inline-direction: column;
+          align-items: center;
+          margin: 20px;
+        }
+        .product img {
+          width: 200px;
+          height: 200px;
+        }
+        .product h3 {
+          margin-top: 10px;
+        }
+        .product p {
+          margin-top: 5px;
+          font-weight: bold;
+        }
+        .cart {
+            margin: 20px;
+             border-radius:50%;
+             background-color: red;
+             transition: 0.1s;
+             cursor: pointer;
+             position: fixed;
+             top: 50px;
+             right:50px;
+             display: flex;
+             justify-content: center;
+             align-items: contain;
+             padding: 15px;
+          }
+        .cart h2 {
+            margin-bottom: 10px;
+        }
+    </style>
+    <style>
+        .header{
+        font-size: 90px;
+        color: darkorange;
+        margin: 5px;
+        }
+    </style>
+</head>
+<h2 class="header">Renome</h2>
+<body>
+<div class="cart">
+    <h2>Корзина</h2>
+    <ul id="cart-items"></ul>
+    <p id="total-price">Общая цена: 0.00</p>
+</div>
+
+<div class="product">
+    <img src="https://old.yarkiy.ru/system/uploads/preview/photo_storage/192055/1586269315_1542809.jpg" alt="Товар 1">
+    <h3>SSD накопитель WD Blue 2.5" 1Tb SATA III TLC 3D</h3>
+    <p>Цена: 4000.99 pуб </p>
+    <button onclick="addToCart('SSD накопитель WD Blue 2.5 1Tb SATA III TLC 3D', 4000.99)">
+        Добавить в корзину
+    </button>
+</div>
+
+<div class="product">
+    <img src="https://i5.walmartimages.com/asr/6c8af126-ff10-4a5f-bb66-dc04a306bce6_1.b4479bb1bb8eca7d7e133311a6943a8a.jpeg" alt="Товар2">
+    <h3>Meraviglia Prevenzione Aula 1tb sata ssd Settlers Costoso conversazione</h3>
+    <p>Цена: 3000.99 pуб</p>
+    <button onclick="addToCart('Meraviglia Prevenzione Aula 1tb sata ssd Settlers Costoso conversazione', 3000.99)">Добавить в корзину</button>
+</div>
+
+<div class="product">
+    <img src="https://wizardmsk.ru/image/cache/catalog/data/Nakopitel_SSD_Seagate_2TB_BarraCuda_STGS2000401_2_5quotquot_SATA_III-500x500.jpg" alt="Товар 3">
+    <h3>Накопитель SSD Seagate 2TB BarraCuda STGS2000401 2.5</h3>
+    <p>Цена: 2500.99 pуб</p>
+    <button onclick="addToCart('Накопитель SSD Seagate 2TB BarraCuda STGS2000401 2.5', 2500.99)">Добавить в корзину</button>
+</div>
+
+<div class="product">
+    <img src="https://msk.wadoo.ru/upload/iblock/3a4/3a4713d5997e4723e90e93544496127b.jpg" alt="Товар 4">
+    <h3>Внешний SSD Seagate Game Drive for Xbox SSD 1 ТБ черный</h3>
+    <p>Цена: 5000.99 pуб</p>
+    <button onclick="addToCart('Внешний SSD Seagate Game Drive for Xbox SSD 1 ТБ черный', 5000.99)">Добавить в корзину</button>
+</div>
+
+<script>
+    function addToCart(itemName, itemPrice) {
+      var cartItemsElement = document.getElementById('cart-items');
+      var totalElement = document.getElementById('total-price');
+
+      // Создаем новый элемент списка с названием товара
+      var listItem = document.createElement('li');
+      listItem.textContent = itemName;
+
+      // Добавляем элемент списка в корзину
+      cartItemsElement.appendChild(listItem);
+
+      // Обновляем общую цену
+      var totalPrice = parseFloat(totalElement.textContent.slice(12));
+      totalPrice += itemPrice;
+      totalElement.textContent = 'Общая цена: ' + totalPrice.toFixed(2);
+    }
+</script>
+</body>
+</html>

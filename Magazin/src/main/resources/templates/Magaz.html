@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org
+http://www.thymeleaf.org
+http://www.thymeleaf.org ">
+<head>
+    <meta charset="UTF-8">
+    <title>Интернет-магазин</title>
+    <style>
+        .product {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin: 20px;
+        }
+        .product img {
+          width: 200px;
+          height: 200px;
+        }
+        .product h3 {
+          margin-top: 10px;
+        }
+        .product p {
+          margin-top: 5px;
+          font-weight: bold;
+        }
+        .cart {
+            margin: 20px;
+             border-radius:50%;
+             background-color: red;
+             transition: 0.1s;
+             cursor: pointer;
+             position: fixed;
+             top: 50px;
+             right:50px;
+             display: flex;
+             justify-content: center;
+             align-items: contain;
+             padding: 15px;
+          }
+        .cart h2 {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="cart">
+    <h2>Корзина</h2>
+    <ul id="cart-items"></ul>
+    <p id="total-price">Общая цена: $0.00</p>
+</div>
+
+<!-- Товары генерируются динамически внутри цикла -->
+<div th:each="product : ${products}" class="product">
+    <a th:href="@{/products/{id}(id=${products.id})}">
+        <img th:src="@{${products.image}}" alt="Товар">
+        <h3 th:text="${products.name}"></h3>
+    </a>
+    <p th:text="'Цена: $' + ${products.price}"></p>
+    <button th:attr="data-id=${products.id}, data-name=${products.name}, data-price=${products.price}" onclick="addToCart(this)">Добавить в корзину</button>
+</div>
+
+<script>
+    function addToCart(itemName, itemPrice) {
+      var cartItemsElement = document.getElementById('cart-items');
+      var totalElement = document.getElementById('total-price');
+
+      // Создаем новый элемент списка с названием товара
+      var listItem = document.createElement('li');
+      listItem.textContent = itemName;
+
+      // Добавляем элемент списка в корзину
+      cartItemsElement.appendChild(listItem);
+
+      // Обновляем общую цену
+      var totalPrice = parseFloat(totalElement.textContent.slice(12));
+      totalPrice += itemPrice;
+      totalElement.textContent = 'Общая цена: $' + totalPrice.toFixed(2);
+    }
+</script>
+</body>
+</html>
